@@ -461,6 +461,43 @@ sendPostToWordpress(Collegename,paragraph,excerpt, tags, categories);
 // Clear the course table
 document.getElementById('courseTable').getElementsByTagName('tbody')[0].innerHTML = '';
 
+function validateCourse(courseName, courseFee) {
+    // Check if the course name is empty after trimming whitespace
+    if (courseName.trim() === "") {
+        alert("Please enter a valid course name.");
+        return;
+    }
+
+    // Check if the course fee matches the format 23K-87K
+    const feePattern = /^(\d+K)-(\d+K)$/;
+    const match = courseFee.match(feePattern);
+
+    if (!match) {
+        alert("Please enter the course fee in the format '23K-87K'.");
+        return;
+    }
+
+    // Extract the numerical values and convert to thousands
+    const minFee = parseInt(match[1].replace('K', '')) * 1000;
+    const maxFee = parseInt(match[2].replace('K', '')) * 1000;
+
+    // Check if the fees are valid
+    if (minFee <= 0 || maxFee <= 0 || minFee >= maxFee) {
+        alert("Please enter a valid range for the course fee.");
+        return;
+    }
+
+    // Further code to process the course details
+    console.log("Course name and fee are valid.");
+    console.log("Course name:", courseName);
+    console.log("Course fee range:", minFee, "-", maxFee);
+}
+
+// Example calls to the function
+validateCourse("Math 101", "23K-87K"); // Valid
+validateCourse("Science", "0K-10K"); // Invalid, minFee is 0
+validateCourse("", "23K-87K"); // Invalid, course name is empty
+validateCourse("History", "23-87K"); // Invalid, incorrect format
 
         function addCourse() {
             // Get input values
