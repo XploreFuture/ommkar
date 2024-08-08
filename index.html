@@ -467,12 +467,6 @@ document.getElementById('courseTable').getElementsByTagName('tbody')[0].innerHTM
             var courseName = document.getElementById("courseName").value;
             var courseFee = parseFloat(document.getElementById("courseFee").value);
 
-            // Validate input
-            if (courseName.trim() === "" || isNaN(courseFee) || courseFee <= 0) {
-                alert("Please enter valid course name and fee.");
-                return;
-            }
-
             // Create new row in the table
             var table = document.getElementById("courseTable").getElementsByTagName('tbody')[0];
             var newRow = table.insertRow(table.rows.length);
@@ -481,7 +475,7 @@ document.getElementById('courseTable').getElementsByTagName('tbody')[0].innerHTM
 
             // Add data to cells
             cell1.textContent = courseName;
-            cell2.textContent = courseFee.toFixed(2); // Display fee with 2 decimal places
+            cell2.textContent = courseFee; 
 
             // Clear input fields
             document.getElementById("courseName").value = "";
